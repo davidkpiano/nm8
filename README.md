@@ -1,5 +1,7 @@
 # nm8
 
+Ridiculously small animation library. Fits in a tweet.
+
 # Usage
 - `npm install nm8 --save`
 
