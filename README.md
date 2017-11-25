@@ -28,9 +28,9 @@ animation.stop();
 ```
 
 # API
-## `nm8(handler: (value: number) => void, duration?: number)`
+## `nm8(onTick: (value: number) => void, duration?: number)`
 
-Creates an animation that calls `handler` with the current:
+Creates an animation that calls `onTick` with the current:
 - `offset` (between 0 and 1) if `duration` is specified
 - `delta` (in ms) if no `duration` is specified. Usually `16` or `17`.
 
@@ -40,11 +40,11 @@ Starts playing the animation, because the animation doesn't just fire off immedi
 
 ## `animation.pause()`
 
-Pauses the animation. The `handler` won't be called again until `.play()` or `.stop()` is called.
+Pauses the animation. The `onTick` handler won't be called again until `.play()` or `.stop()` is called.
 
 ## `animation.stop()`
 
-Stops the animation. The `handler` will be called with the end value (either `duration` or `Infinity`). Calling `.play()` on a stopped animation will restart it.
+Stops the animation. The `onTick` handler will be called with the end value (either `1` if `duration` is specified or `Infinity` otherwise). Calling `.play()` on a stopped animation will restart it.
 
 # FAQs
 
@@ -68,6 +68,21 @@ const easeSine = offset => fn => fn(Math.sin(offset * Math.PI / 2));
 const animation = nm8(easeSine(offset => {
   ball.style.transform = `translateX(${offset * 1000}px)`
 }), 1000).play();
+```
+
+**What about delays?**
+
+```js
+// just copy-paste this. it's math
+const delayNm8 = (fn, duration, delay) => nm8(delayOffset => {
+  const offset = Math.max(delayOffset - delay / (duration + delay), 0) * (duration + delay) / duration;
+  fn(offset);
+}, duration + delay);
+
+// 1-second ease animation with 2-second delay
+const animation = delayNm8(easeSine(offset => {
+  ball.style.transform = `translateX(${offset * 1000}px)`
+}), 1000, 2000).play();
 ```
 
 **I want more easing functions.**
