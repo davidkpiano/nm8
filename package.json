@@ -2,7 +2,10 @@
   "name": "nm8",
   "version": "0.0.0",
   "description": "",
-  "keywords": [],
+  "keywords": [
+    "animation",
+    "tween"
+  ],
   "main": "dist/nm8.umd.js",
   "module": "dist/nm8.es5.js",
   "typings": "dist/types/nm8.d.ts",
@@ -12,7 +15,7 @@
   "author": "David Khourshid <davidkpiano@gmail.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/davidkpiano/nm8"
   },
   "license": "MIT",
   "engines": {
