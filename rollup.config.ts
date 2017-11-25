@@ -25,7 +25,9 @@ export default {
   plugins: [
     // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
     commonjs(),
-    babelMinify(),
+    babelMinify({
+      simplify: false
+    }),
     filesize(),
 
     // Resolve source maps to the original source
