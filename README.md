@@ -36,11 +36,11 @@ Creates an animation that calls `handler` with the current:
 
 ## `animation.play()`
 
-Starts the animation, because the animation doesn't just fire off immediately. That's irresponsible.
+Starts playing the animation, because the animation doesn't just fire off immediately. That's irresponsible.
 
 ## `animation.pause()`
 
-Pauses the animation. The `handler` won't be called until `.play()` or `.stop()` is called.
+Pauses the animation. The `handler` won't be called again until `.play()` or `.stop()` is called.
 
 ## `animation.stop()`
 
@@ -67,7 +67,7 @@ const easeSine = offset => fn => fn(Math.sin(offset * Math.PI / 2));
 
 const animation = nm8(easeSine(offset => {
   ball.style.transform = `translateX(${offset * 1000}px)`
-}));
+}), 1000).play();
 ```
 
 **I want more easing functions.**
