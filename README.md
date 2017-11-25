@@ -5,6 +5,8 @@ Ridiculously small animation library. Fits in a tweet.
 - `npm install nm8 --save`
 
 ```js
+import nm8 from 'nm8';
+
 const output = value => console.log(value);
 
 // create animation
