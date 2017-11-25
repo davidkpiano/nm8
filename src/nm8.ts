@@ -14,16 +14,17 @@ export default function nm8(
   let elapsed: number
 
   let tick = (timeStamp: number) => {
-    let delta = -(currentTime || timeStamp) + (currentTime = timeStamp)
+    let delta =
+      +!rate || -(currentTime || timeStamp) + (currentTime = timeStamp)
     fn(
       duration ? Math.min(Math.max((elapsed += delta) / duration, 0), 1) : delta
     )
-    return !rate || elapsed >= +duration! || requestAnimationFrame(tick)
+    return !rate || elapsed >= duration! || requestAnimationFrame(tick)
   }
   let nm810 = {
     play: () => (
       (rate = 1),
-      (elapsed && elapsed <= +duration!) || (elapsed = 0),
+      (duration && elapsed <= duration!) || (elapsed = 0),
       tick(performance.now()),
       nm810
     ),
