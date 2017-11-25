@@ -3,6 +3,11 @@ Ridiculously small animation library. Fits in a tweet.
 
 # Usage
 - `npm install nm8 --save`
+- Or get it from https://unpkg.com/nm8: 
+
+```html
+<script src="https://unpkg.com/nm8"></script>
+```
 
 ```js
 import nm8 from 'nm8';
@@ -82,5 +87,5 @@ Just avoid IE, okay?
 So you can copy-paste it:
 
 ```js
-const nm8=(a,b)=>{let c,d=0,e=0,f=_=>c=http://performance.now (),g=_=>{let h=-c+f();return e+=h,a(b?e/b:h),!d||e>=+b||requestAnimationFrame(g)},h={play:_=>(d=1,e>=+b&&(e=0),f(),g(),h),pause:_=>(d=0,h),stop:_=>(e=b||1/0,f(),g(),h)};return h}
+const nm8=(a,b)=>{let c,d=0,e=0,f=_=>c=performance.now(),g=_=>{let h=-c+f();return e+=h,a(b?e/b:h),!d||e>=+b||requestAnimationFrame(g)},h={play:_=>(d=1,e>=+b&&(e=0),f(),g(),h),pause:_=>(d=0,h),stop:_=>(e=b||1/0,f(),g(),h)};return h}
 ```
