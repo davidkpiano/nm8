@@ -1,6 +1,6 @@
 export interface Nm810 {
     play: () => void;
     pause: () => void;
+    stop: () => void;
 }
-declare const nm8: (fn: (deltaOrOffset: number) => any, duration: number) => Nm810;
-export default nm8;
+export default function nm8(fn: (deltaOrOffset: number) => any, duration?: number): Nm810;
