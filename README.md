@@ -63,7 +63,7 @@ const animation = nm8(offset => {
 
 ```js
 // use sine easing, it's really nice
-const easeSine = offset => fn => fn(Math.sin(offset * Math.PI / 2));
+const easeSine = fn => offset => fn(Math.sin(offset * Math.PI / 2));
 
 const animation = nm8(easeSine(offset => {
   ball.style.transform = `translateX(${offset * 1000}px)`
