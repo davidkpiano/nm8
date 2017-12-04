@@ -3,8 +3,15 @@ Ridiculously small animation library. Fits in a tweet.
 
 # Usage
 - `npm install nm8 --save`
+- Or get it from https://unpkg.com/nm8: 
+
+```html
+<script src="https://unpkg.com/nm8"></script>
+```
 
 ```js
+import nm8 from 'nm8';
+
 const output = value => console.log(value);
 
 // create animation
@@ -21,23 +28,23 @@ animation.stop();
 ```
 
 # API
-## `nm8(handler: (value: number) => void, duration?: number)`
+## `nm8(onTick: (value: number) => void, duration?: number)`
 
-Creates an animation that calls `handler` with the current:
+Creates an animation that calls `onTick` with the current:
 - `offset` (between 0 and 1) if `duration` is specified
 - `delta` (in ms) if no `duration` is specified. Usually `16` or `17`.
 
 ## `animation.play()`
 
-Starts the animation, because the animation doesn't just fire off immediately. That's irresponsible.
+Starts playing the animation, because the animation doesn't just fire off immediately. That's irresponsible.
 
 ## `animation.pause()`
 
-Pauses the animation. The `handler` won't be called until `.play()` or `.stop()` is called.
+Pauses the animation. The `onTick` handler won't be called again until `.play()` or `.stop()` is called.
 
 ## `animation.stop()`
 
-Stops the animation. The `handler` will be called with the end value (either `duration` or `Infinity`). Calling `.play()` on a stopped animation will restart it.
+Stops the animation. The `onTick` handler will be called with the end value (either `1` if `duration` is specified or `Infinity` otherwise). Calling `.play()` on a stopped animation will restart it.
 
 # FAQs
 
@@ -56,11 +63,26 @@ const animation = nm8(offset => {
 
 ```js
 // use sine easing, it's really nice
-const easeSine = offset => fn => fn(Math.sin(offset * Math.PI / 2));
+const easeSine = fn => offset => fn(Math.sin(offset * Math.PI / 2));
 
 const animation = nm8(easeSine(offset => {
   ball.style.transform = `translateX(${offset * 1000}px)`
-}));
+}), 1000).play();
+```
+
+**What about delays?**
+
+```js
+// just copy-paste this. it's math
+const delayNm8 = (fn, duration, delay) => nm8(delayOffset => {
+  const offset = Math.max(delayOffset - delay / (duration + delay), 0) * (duration + delay) / duration;
+  fn(offset);
+}, duration + delay);
+
+// 1-second ease animation with 2-second delay
+const animation = delayNm8(easeSine(offset => {
+  ball.style.transform = `translateX(${offset * 1000}px)`
+}), 1000, 2000).play();
 ```
 
 **I want more easing functions.**
@@ -80,5 +102,5 @@ Just avoid IE, okay?
 So you can copy-paste it:
 
 ```js
-const nm8=(a,b)=>{let c,d=0,e=0,f=_=>c=http://performance.now (),g=_=>{let h=-c+f();return e+=h,a(b?e/b:h),!d||e>=+b||requestAnimationFrame(g)},h={play:_=>(d=1,e>=+b&&(e=0),f(),g(),h),pause:_=>(d=0,h),stop:_=>(e=b||1/0,f(),g(),h)};return h}
+const nm8=(a,b)=>{let c,d=0,e=0,f=_=>c=performance.now(),g=_=>{let h=-c+f();return e+=h,a(b?e/b:h),!d||e>=+b||requestAnimationFrame(g)},h={play:_=>(d=1,e>=+b&&(e=0),f(),g(),h),pause:_=>(d=0,h),stop:_=>(e=b||1/0,f(),g(),h)};return h}
 ```

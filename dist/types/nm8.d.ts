@@ -3,5 +3,4 @@ export interface Nm810 {
     pause: () => Nm810;
     stop: () => Nm810;
 }
-declare const nm8: (fn: (deltaOrOffset: number) => any, duration: number) => Nm810;
-export default nm8;
+export default function nm8(fn: (deltaOrOffset: number) => any, duration?: number): Nm810;
