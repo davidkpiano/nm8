@@ -22,15 +22,13 @@ export default {
   watch: {
     include: 'compiled/**',
   },
+  strict: false,
   plugins: [
     // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
     commonjs(),
     babelMinify({
       simplify: false
     }),
-    filesize(),
-
-    // Resolve source maps to the original source
-    sourceMaps(),
+    filesize()
   ],
 }

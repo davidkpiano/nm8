@@ -1,1 +1,1 @@
-var nm8=function(){'use strict';return(a,b)=>{let c,d=0,e=0,f=()=>c=performance.now(),g=()=>{let h=-c+f();return e+=h,a(b?e/b:h),!d||e>=+b||requestAnimationFrame(g)},h={play:()=>(d=1,e>=+b&&(e=0),f(),g(),h),pause:()=>(d=0,h),stop:()=>(e=b||1/0,f(),g(),h)};return h}}();
+var nm8=function(){return function(a,b){let c,d,e,f=(g)=>{let h=+!c||-(d||g)+(d=g);a(b?Math.min(Math.max((e+=h)/b,0),1):h);return!c||e>=b||requestAnimationFrame(f)},g={play:()=>(c=1,b&&e<=b||(e=0),f(performance.now()),g),pause:()=>(c=0,g),stop:()=>(e=d=c=0,g)};return g}}();

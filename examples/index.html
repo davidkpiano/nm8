@@ -5,8 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    body, html {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+    }
+    #ball {
+      height: 5vmax;
+      width: 5vmax;
+      border-radius: 50%;
+      background-color: red;
+      position: absolute;
+    }
+  </style>
 </head>
 <body>
   <script src="../dist/nm8.umd.js"></script>
+  <div id="ball"></div>
+  <script>
+    const body = document.body;
+    const ball = document.getElementById('ball');
+    const easeSine = offset => (1 - Math.cos(offset * Math.PI)) / 2;
+
+    body.addEventListener('click', (e) => {
+      const ballRect = ball.getBoundingClientRect();
+      const deltaX = e.clientX - ballRect.left;
+      const deltaY = e.clientY - ballRect.top;
+
+      ball.style.left = `${e.clientX}px`;
+      ball.style.top = `${e.clientY}px`;
+
+      nm8(offset => {
+        const inverseOffset = easeSine(offset) - 1;
+        ball.style.transform = `translate(${deltaX * inverseOffset}px, ${deltaY * inverseOffset}px)`
+      }, 300).play();
+    });
+  </script>
 </body>
 </html>
