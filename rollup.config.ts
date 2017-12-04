@@ -16,7 +16,7 @@ export default {
     { file: pkg.main, name: camelCase(libraryName), format: 'iife' },
     { file: pkg.module, format: 'es' },
   ],
-  sourcemap: true,
+  sourcemap: false,
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
   external: [],
   watch: {

@@ -1,7 +1,8 @@
 // Get it? An-im-a-tion?
 export interface Nm810 {
-  play: () => void
-  pause: () => void
+  play: () => Nm810
+  pause: () => Nm810
+  stop: () => Nm810
 }
 
 const nm8 = (fn: (deltaOrOffset: number) => any, duration: number): Nm810 => {
